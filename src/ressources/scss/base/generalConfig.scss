@@ -1,0 +1,33 @@
+@import './typography.scss';
+body{
+    font-size: 18px;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+    font-family: Roboto,Alef;
+}
+.bold{
+    font-weight: bold;
+}
+.italic{
+    font-style: italic;
+}
+.only-desktop{
+    display: none!important;
+}
+h1,h2,h3,h4,h5 {
+        color: $base-color;
+}
+.header ~ div:not(.footer){
+ width: 90%;
+ margin: 0 auto;
+}
+.no-scroll {
+    height: 100%;
+    overflow: hidden;
+}
+@media only screen and  (min-width:1000px){
+    .only-desktop{
+        display: initial!important;
+    }
+}

@@ -1,0 +1,46 @@
+.title-line {
+    display: flex;
+    margin: 10px 0;
+    .content {
+        font-size: 1.2em;
+        font-weight: bold;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .line {
+        flex-grow: 10;
+        display: flex;
+        align-self: center;
+        justify-content: space-around;
+    }
+
+    .line::after,
+    .line::before {
+        content: "";
+        display: flex;
+        height: 1px;
+        width: 50%;
+        align-self: baseline;
+    }
+
+    &.eng {
+        .line::after {
+            background-color: #e2e2e2;
+        }
+
+        .line::before {
+            background: linear-gradient(to right, #bfa279, #e2e2e2);
+        }
+    }
+
+    &.heb {
+        .line::after {
+            background: linear-gradient(to left, #bfa279, #e2e2e2);
+        }
+
+        .line::before {
+            background-color: #e2e2e2;
+        }
+    }
+}

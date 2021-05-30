@@ -1,0 +1,19 @@
+.counter-day{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+    
+    font-size: $small;
+    >div{
+        align-self: center;
+        text-align: center;
+    }
+    &.green{
+        background-color: green;
+        color:$text-light-color;
+    }
+    &.yellow{
+        background-color: yellow;
+        color:$text-dark-color;
+    }
+}

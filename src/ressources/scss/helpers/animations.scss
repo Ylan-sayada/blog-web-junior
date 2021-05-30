@@ -1,0 +1,31 @@
+@keyframes addedContent{
+    0%{
+        position: relative;
+        top: 0px;
+        transform: rotate(0);
+    }
+    25%{
+        top: -15px;
+        transform: rotate(10deg);
+    }
+    50%{
+        top: 0px;
+        transform: rotate(0);
+    }
+    75%{
+        top: 15px;
+        transform: rotate(-10deg);
+    }
+    100%{
+        top: 1px;
+        transform: rotate(0);
+    }
+}
+@keyframes opacityTransition {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

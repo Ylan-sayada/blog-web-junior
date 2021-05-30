@@ -1,0 +1,35 @@
+.header {
+    @include imgBackground('/ressources/img/code.jpg');
+    height: calc(100vh - #{$nav-height});
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+
+    .content-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        align-self: center;
+        width: 80%;
+        height: 80%;
+        h1{
+            color: $base-color;
+            font-weight: bold;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        p{
+            text-align: right;
+            font-size: 0.9em;
+            line-height: 1.2em;
+        }
+        .header-button{
+            width:100%;
+            color: $text-light-color;
+            background-color: $text-dark-color;
+        }
+
+    }
+}

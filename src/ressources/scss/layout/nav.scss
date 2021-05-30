@@ -1,0 +1,12 @@
+@import '../helpers/variable' ;
+.navBar{
+    background-color: $base-color;
+    color: $text-light-color;
+    justify-content: space-between;
+
+    .right-side{
+        display: flex;
+        align-items:center;
+    }
+}
+
