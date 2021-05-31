@@ -20,4 +20,3 @@ export default function CounterDay(props : {dateStart : Date,foundWork: boolean}
     )
 }
 
-let route = 'component/ect/CounterDay';

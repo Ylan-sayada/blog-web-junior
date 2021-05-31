@@ -1,0 +1,26 @@
+@use '../helpers/variable.scss'as variable;
+
+@mixin socialPanel {
+    .social-info {
+        justify-content: center;
+        color: variable.$text-dark-secondary-color;
+        display: flex;
+        font-size: variable.$small;
+
+        .view-and-comment {
+            display: flex;
+        }
+
+        .likes {
+            margin: 0 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            svg {
+                color: pink;
+            }
+        }
+
+    }
+}

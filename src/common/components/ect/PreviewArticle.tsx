@@ -1,10 +1,9 @@
-import React, { MouseEvent, useState } from 'react'
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import CommentIcon from '@material-ui/icons/Comment';
+import React from 'react'
 import { Link } from 'react-router-dom';
+import Img from './Img';
+import SocialPanel from '../../mainComponents/SocialPanel';
 interface propsArticle {
+    id: number,
     img: string,
     title: string,
     desc: string
@@ -12,40 +11,21 @@ interface propsArticle {
     commentsNum: number,
     viewNum: number,
     likeNum: number,
-    column?:boolean
-    
+    column?: boolean
 }
 export default function PreviewArticle(props: { article: propsArticle }) {
-    
-    let { img, title, desc, publishDate, commentsNum, viewNum, likeNum,column } = props.article;
-    let [liked, setliked] = useState(false);
-    let [likeSum, setLikeSum] = useState(likeNum);
-    let handleLike = (e: MouseEvent) => {
-        if (!liked) {
-            setliked(true);
-            setLikeSum(likeSum + 1);
-        } else {
-            setliked(false);
-            setLikeSum(likeSum - 1);
-        }
-    }
+
+    let { id, img, title, desc, publishDate, column } = props.article
+    let linkToArticle = `article/${id}`;
     return (
 
-        <div className={`preview-article ${column &&'column'}`}>
-            <Link to="/article"><div className="img-div" style={{ backgroundImage: `url(${img})` }}> </div></Link>
+        <div dir="rtl" className={`preview-article ${column ? 'column' : ''}`}>
+            <Link to={linkToArticle}><Img src={img} /></Link>
             <div className="desc-preview">
-                <Link to="/article"><h4>{title}</h4></Link>
-                <span className="sub-desc" dir="rtl" >פורסם ב-{publishDate.toLocaleDateString()}</span>
+                <Link to={linkToArticle}><h4>{title}</h4></Link>
+                <span className="sub-desc" >פורסם ב-{publishDate.toLocaleDateString()}</span>
                 <div className="desc"><p>{desc}</p></div>
-                <div className="social-info">
-                    <div className="view-and-comment">
-                        <span><VisibilityIcon /> <span className="only-desktop">views</span><span className="view-num">{viewNum}</span></span>
-                        <span><CommentIcon /><span className="only-desktop">comments</span><span className="comment-num">{commentsNum}</span></span>
-                    </div>
-                    <div className="likes" onClick={handleLike}>
-                        {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}<span>{likeSum}</span>
-                    </div>
-                </div>
+                <SocialPanel id={id} />
             </div>
         </div>
 

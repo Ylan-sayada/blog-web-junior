@@ -1,6 +1,8 @@
-.fine-sep{
+@use '../helpers/variable.scss'as variable;
+
+.fine-sep {
     height: 1px;
     width: 100%;
-    background-color: $divider-color;
+    background-color: variable.$divider-color;
     margin: 20px 0;
 }

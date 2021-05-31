@@ -4,17 +4,19 @@
     justify-content: center;
     align-items: center;
     margin: 25px 0;
-    &.column{
+
+    &.column {
         flex-direction: column;
         text-align: right;
-        .img-div{
+
+        .img-div {
             width: 100vw;
-            min-height:180px;
-            height: auto; 
+            min-height: 180px;
+            height: auto;
             background-size: cover;
-            
         }
     }
+
     a .img-div {
         width: 90px;
         height: 90px;
@@ -23,24 +25,34 @@
         background-position: center;
         margin: 0 5px 0 0;
     }
+
     .desc-preview {
         @import './subDesc.scss';
+
         .social-info {
+            justify-content: center;
             color: $text-dark-secondary-color;
             display: flex;
             font-size: $small;
         }
-        h4,.sub-desc,.desc{
+
+        h4,
+        .sub-desc,
+        .desc {
             margin: 10px 5%;
         }
-        .desc{
+
+        .desc {
             font-size: $small;
             line-height: 1.5rem;
         }
-        .view-and-comment{
+
+        .view-and-comment {
             display: flex;
         }
-         span,.likes {
+
+        span,
+        .likes {
             margin: 0 5px;
             display: flex;
             align-items: center;
@@ -50,9 +62,11 @@
             font-size: $big;
             font-weight: bold;
         }
-        .likes{
+
+        .likes {
             cursor: pointer;
-            svg{
+
+            svg {
                 color: pink;
             }
         }

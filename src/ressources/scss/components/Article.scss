@@ -1,0 +1,5 @@
+@use './SocialPanel.scss'as social;
+
+.article {
+    @include social.socialPanel;
+}
