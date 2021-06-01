@@ -2,19 +2,28 @@
 
 @mixin socialPanel {
     .social-info {
-        justify-content: center;
+        justify-content: space-between;
+        flex-direction: row-reverse;
         color: variable.$text-dark-secondary-color;
         display: flex;
         font-size: variable.$small;
+        align-items: center;
 
-        .view-and-comment {
+
+        .view-and-comment,
+        .likes {
             display: flex;
+
+            span {
+                margin: 0 5px;
+                display: flex;
+                align-items: center;
+            }
+
         }
 
         .likes {
             margin: 0 5px;
-            display: flex;
-            align-items: center;
             cursor: pointer;
 
             svg {
