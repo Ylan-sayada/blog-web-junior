@@ -1,8 +1,18 @@
-.newsletter-input{
-   display: flex;
-   justify-content: space-evenly;
-   flex-direction: column;
- >*{
-     margin:10px 0;
- }
+@use '../vendors/material-ui/resetInput';
+
+.newsletter-input {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+
+  >* {
+    margin: 10px 0;
+  }
+
+  label {
+    right: 0;
+    left: auto;
+  }
+
+  @include resetInput.resetInput;
 }

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import RoundedIcone from '../components/ect/RoundedIcone';
 import me from '../../ressources/img/me.jpeg';
 import FineSep from '../components/sep/FineSep';
 import SocialPanel from './SocialPanel';
+import MessageInterface from '../components/ect/MessageInterface';
 
 let article = {
     id: 1,
@@ -35,7 +36,6 @@ export default function Article() {
             // Anything in here is fired on component unmount.
         }
     }, [])
-    let { id }: { id: string } = useParams();
     return (
         <div className="article" dir="rtl">
             <div className="head-article" style={{ backgroundImage: `url(${article.img})` }}>
@@ -53,17 +53,16 @@ export default function Article() {
             </div>
             <div className="content">
 
-                <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi laborum mollitia hic fugiat aspernatur excepturi minima magni quidem incidunt reiciendis. Vitae sit deserunt aut temporibus, excepturi sint adipisci dolor deleniti!
-                Praesentium tempora libero natus magni modi fuga hic dolores adipisci, architecto assumenda, fugit minus eum error similique beatae accusamus nesciunt nihil tempore ipsam. Sunt unde ratione at, ut ab nesciunt?
-                Laborum dolores porro enim quia nemo aliquid labore. Cumque facere dolorum minus repellendus distinctio consectetur. Esse explicabo quam recusandae autem eveniet sunt excepturi! Molestias, unde. Accusamus modi voluptatem a vel.
-                Deserunt provident fuga ex quis itaque a dicta ipsa eveniet cum similique eaque, possimus corporis nesciunt dignissimos officia! Consequuntur officia ab consectetur voluptate distinctio nulla veritatis veniam fuga sequi exercitationem.
-                Unde deleniti in dolorem amet excepturi officiis molestiae minus asperiores sed autem facilis, accusamus necessitatibus quas minima possimus repellendus numquam nam dolor voluptate cum esse. Ratione expedita eligendi autem aut!</p>
-                <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. </h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit minus repudiandae culpa nostrum temporibus nobis laboriosam animi nesciunt, fugit quaerat ducimus praesentium dolor consequuntur, tempora quae earum voluptate, error similique?</p>
+                <h3>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרע </h3>
+                <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק.</p>
+                <h3>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרע </h3>
+                <p>לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק. קוואזי במר מודוף. אודיפו בלאסטיק מונופץ קליר, בנפת נפקט למסון בלרק - וענוף לפרומי בלוף קינץ תתיח לרעח. לת צשחמי צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה שיצמה ברורק.</p>
                 <FineSep />
-                <SocialPanel id={id} />
+                <SocialPanel viewNum={article.viewNum} commentsNum={article.commentsNum} likeNum={article.likeNum} />
+                <FineSep />
+                <MessageInterface />
             </div>
+
         </div>
     )
 }

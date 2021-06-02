@@ -1,4 +1,5 @@
 @use './SocialPanel.scss'as social;
+@use './MessageInterface.scss'as message;
 
 .article {
     .head-article {
@@ -62,9 +63,12 @@
         }
     }
 
-    .social-info {
-        padding: 10px 0;
-    }
+
 
     @include social.socialPanel;
+    @include message.messageInterface;
+
+    .view-and-comment>span:last-child {
+        display: none;
+    }
 }

@@ -17,11 +17,11 @@
             border-radius: 100%;
 
             &.facebook-icone {
-                color: #097feb;
+                color: $facebook;
             }
 
             &.linkedin-icone {
-                color: #0a66c2;
+                color: $linkedin;
             }
 
             &.mail-icone {
@@ -29,6 +29,6 @@
             }
         }
     }
-    
+
 
 }

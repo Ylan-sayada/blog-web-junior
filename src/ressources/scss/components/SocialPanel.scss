@@ -9,6 +9,30 @@
         font-size: variable.$small;
         align-items: center;
 
+        .social-network {
+            display: flex;
+
+            .linkedin,
+            .facebook,
+            .twitter {
+                margin: 0px 5px;
+                transition: 0.5s color ease;
+                cursor: pointer;
+            }
+
+            .linkedin:hover {
+                color: variable.$linkedin;
+            }
+
+            .facebook:hover {
+                color: variable.$facebook;
+            }
+
+            .twitter:hover {
+                color: variable.$twitter;
+            }
+        }
+
 
         .view-and-comment,
         .likes {
@@ -32,4 +56,6 @@
         }
 
     }
+
+
 }

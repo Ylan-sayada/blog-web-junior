@@ -1,3 +1,5 @@
+@use './SocialPanel';
+
 .preview-article {
     width: 100%;
     display: flex;
@@ -29,12 +31,7 @@
     .desc-preview {
         @import './subDesc.scss';
 
-        .social-info {
-            justify-content: center;
-            color: $text-dark-secondary-color;
-            display: flex;
-            font-size: $small;
-        }
+
 
         h4,
         .sub-desc,
@@ -47,29 +44,23 @@
             line-height: 1.5rem;
         }
 
-        .view-and-comment {
-            display: flex;
-        }
 
-        span,
-        .likes {
-            margin: 0 5px;
-            display: flex;
-            align-items: center;
-        }
 
         h4 {
             font-size: $big;
             font-weight: bold;
         }
 
-        .likes {
-            cursor: pointer;
+        @include SocialPanel.socialPanel;
 
-            svg {
-                color: pink;
-            }
+        .social-network {
+            display: none !important;
+
         }
     }
 
+}
+
+.latest-article.center .preview-article .social-info {
+    justify-content: center;
 }

@@ -25,7 +25,7 @@ export default function PreviewArticle(props: { article: propsArticle }) {
                 <Link to={linkToArticle}><h4>{title}</h4></Link>
                 <span className="sub-desc" >פורסם ב-{publishDate.toLocaleDateString()}</span>
                 <div className="desc"><p>{desc}</p></div>
-                <SocialPanel id={id} />
+                <SocialPanel viewNum={props.article.viewNum} commentsNum={props.article.commentsNum} likeNum={props.article.likeNum} />
             </div>
         </div>
 

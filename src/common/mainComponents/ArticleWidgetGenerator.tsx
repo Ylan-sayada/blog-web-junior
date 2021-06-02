@@ -41,7 +41,7 @@ export default function ArticleWidgetGenerator(props: { orderBy: OrderBy, count?
     });
 
     return (
-        <div className={`${props.orderBy}-article`}>
+        <div className={`${props.orderBy}-article center`}>
             <TitleLine size="small">{title}</TitleLine>
             {finalRender}
         </div>

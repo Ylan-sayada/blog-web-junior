@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchInput from '../vendorComponents/materialUi/input/SearchInput';
 import Button from '@material-ui/core/Button';
 import TitleLine from '../components/stylised title/TitleLine';
-import PersistentDrawer from '../vendorComponents/materialUi/input/PersistentDrawer';
+import PersistentDrawer from '../vendorComponents/PersistentDrawer';
 import WithLink from '../components/hoc/WithLink';
 import { ReactComponent as SvgFacebook } from '../../ressources/img/icone/facebookBlack.svg';
 import { ReactComponent as SvgLinkedin } from '../../ressources/img/icone/linkedin.svg';
@@ -56,18 +56,18 @@ export default function Nav(): JSX.Element {
                   {socialListIcone}
                 </div>
               </div>
-              <ul style={{textAlign:"center"}}>
+              <ul style={{ textAlign: "center" }}>
                 <FineSep />
                 <li onClick={handlerDrawerState}><Link to="/blog">בלוג</Link></li>
                 <FineSep />
                 <li onClick={handlerDrawerState}><Link to="/about">הודות</Link></li>
                 <FineSep />
               </ul>
-              <MiniPresentation 
-              name="אילן סיאדה" 
-              titleDesc="FullStack developer" 
-              image={Me} 
-              desc="סטודנט להנדסאי תוכנה במכללת אשקלון,לאחר שנה של לימוד אינטסיבי אני רוצה לשתף אותכם במסע המפרך למציאת עבודה ראשונה בהייטק"/>
+              <MiniPresentation
+                name="אילן סיאדה"
+                titleDesc="FullStack developer"
+                image={Me}
+                desc="סטודנט להנדסאי תוכנה במכללת אשקלון,לאחר שנה של לימוד אינטסיבי אני רוצה לשתף אותכם במסע המפרך למציאת עבודה ראשונה בהייטק" />
             </div>
           </PersistentDrawer >
 
