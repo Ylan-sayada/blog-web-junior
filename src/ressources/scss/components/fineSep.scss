@@ -1,8 +1,12 @@
 @use '../helpers/variable.scss'as variable;
 
-.fine-sep {
+.fine-sep:not(.dashed) {
     height: 1px;
     width: 100%;
     background-color: variable.$divider-color;
     margin: 20px 0;
+}
+
+.fine-sep.dashed {
+    border: 1px dashed variable.$divider-color;
 }

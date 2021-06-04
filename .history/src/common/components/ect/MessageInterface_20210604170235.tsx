@@ -31,7 +31,7 @@ export default function MessageInterface() {
             <h3>הוסף תגובה</h3>
             <MessageForm action="/api/sendMessage" />
             <FineSep dashed />
-            <h3>תגובות ({comments.length})  </h3>
+            <h3>תגובות (6)  </h3>
 
             {comments.length === 0 ? <div style={{ display: "flex", justifyContent: "center", padding: "20px 0" }}><CircularProgress /></div> : comments.filter((comment, index) => index < numComToShow).map((comment, index) => {
                 return <Comments comments={comment} key={index} />

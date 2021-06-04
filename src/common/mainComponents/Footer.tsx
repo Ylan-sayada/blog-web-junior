@@ -2,13 +2,14 @@ import React from 'react'
 import { ReactComponent as SvgFacebook } from '../../ressources/img/icone/facebookBlack.svg';
 import { ReactComponent as SvgLinkedin } from '../../ressources/img/icone/linkedin.svg';
 import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
-import { ReactComponent as SvgWave } from '../../ressources/img/wave.svg';
+import Wave from './Wave';
+
 export default function Footer() {
 
     return (
         <div className="footer">
             <div className="footer-content">
-                <SvgWave />
+                <Wave />
                 <div className="socialIcones" >
                     <a className="facebook-icone" href="https://www.facebook.com/ylan.sayada/" target="_blank" rel="noreferrer">
                         <SvgFacebook fill="currentColor" />
