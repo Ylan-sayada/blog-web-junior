@@ -4,56 +4,79 @@ import FineSep from '../sep/FineSep';
 import AddIcon from '@material-ui/icons/Add';
 import ExtendedBtn from '../buttons/ExtendedBtn';
 import { CircularProgress } from '@material-ui/core';
+import { ReactComponent as SendPost } from '../../../ressources/img/sendPost.svg';
 import Comments from './Comments';
-import displayAfter from '../hoc/displayAfter';
 import axios from 'axios';
 
-let getMsg = async (id?: string) => {
 
-    return await axios.get(`/api/comments/${id}`)
-        .then((res) => {
-            return res;
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+function MessageInterface(props: { id: string }) {
+    let [comments, setComments] = useState<any[]>([]);
+    let [currentIndex, setCurrentIndex] = useState(3);
+    let [numOfArticle, setnumOfArticle] = useState(0);
+    let [hasPosted, setHasposted] = useState(false);
+    let addMsg = async (id: string, currentIndex: number) => {
+        await axios.get(`/api/comments/${id}/${currentIndex}/3`)
+            .then((res) => {
+                setCurrentIndex(currentIndex + 3);
+                let arrData = res.data.map((el: any) => {
+                    return { author: el.name, date: el.date, msg: el.text };
+                })
+                setComments((previous) => [...previous, ...arrData])
 
-}
-export default function MessageInterface(props: { id: string }) {
-    let [comments, setComments] = useState([]);
-    let [numComToShow, setNumComToShow] = useState(3);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
     useEffect(() => {
-        getMsg()
+        let getFirstMsg = async (id?: string) => {
+            return await axios.get(`/api/comments/${id}/0/3`)
+                .then((res) => {
+                    return res;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        }
+        getFirstMsg(props.id)
             .then((result: any) => {
-                let orderList = result.data.map((el: any) => {
-                    return { author: el.name, date: new Date().toLocaleDateString(), msg: el.text };
+                let orderList = result.data[1].map((el: any) => {
+                    return { author: el.name, date: el.date, msg: el.text };
                 });
                 setComments(orderList);
+                setnumOfArticle(result.data[0]);
             });
-
-    }, [setComments]);
+    }, [props.id]);
 
     return (
         <div className="message-interface">
             <h3>הוסף תגובה</h3>
-            <MessageForm action={`/api/comments/${props.id}`} />
+            {hasPosted ? <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly", fontSize: "1.2rem", padding: "20px" }}><span>התגובה נשלחה בהצלחה! </span><SendPost /></div> :
+                <MessageForm postState={setHasposted} id={props.id} action="/api/comments/" />}
             <FineSep dashed />
-            <h3>תגובות ({comments.length})  </h3>
+            <h3>תגובות ({numOfArticle})  </h3>
 
-            {comments.length === 0 ? <div style={{ display: "flex", justifyContent: "center", padding: "20px 0" }}><CircularProgress /></div>
+            { !comments ? <div style={{ display: "flex", justifyContent: "center", padding: "20px 0" }}><CircularProgress /></div>
                 :
-                comments.filter((comment, index) => index < numComToShow).map((comment, index) => {
-                    let DisplayWithTime = displayAfter(index, () => <Comments comments={comment} key={index} />);
-                    return <DisplayWithTime key={index} />;
+                comments.map((comment, index) => {
+                    return <Comments comments={comment} key={index} />
+
                 })}
             <div style={{
                 display: 'flex', justifyContent: 'center'
             }}>
-                {numComToShow < comments.length && < ExtendedBtn onClick={() => setNumComToShow(numComToShow + 3)} customStyle={{ backgroundColor: '#03a9f4', color: '#fff', margin: "20px 0" }}>
-                    <span>הצג עוד</span>
-                    <AddIcon />
-                </ExtendedBtn>}
+                {numOfArticle > comments.length &&
+                    <ExtendedBtn
+                        onClick={() => addMsg(props.id, currentIndex)}
+                        customStyle={{ backgroundColor: '#03a9f4', color: '#fff', margin: "20px 0" }}
+                    >
+                        <span>הצג עוד</span>
+                        <AddIcon />
+                    </ExtendedBtn>
+                }
             </div >
         </div >
     )
+
 }
+export default React.memo(MessageInterface);
