@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Blog from './Blog';
 import About from './About';
 import Article from './Article';
+import AdminEditorSection from './AdminEditorSection';
 export default function Main(): JSX.Element {
 
     return (
@@ -22,6 +23,9 @@ export default function Main(): JSX.Element {
                 </Route>
                 <Route path="/article/:id" >
                     <Article />
+                </Route>
+                <Route path="/admin" >
+                    <AdminEditorSection />
                 </Route>
             </Switch>
         </React.Fragment>

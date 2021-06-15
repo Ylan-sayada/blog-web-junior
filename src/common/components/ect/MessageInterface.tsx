@@ -14,7 +14,11 @@ function MessageInterface(props: { id: string }) {
     let [currentIndex, setCurrentIndex] = useState(3);
     let [numOfArticle, setnumOfArticle] = useState(0);
     let [hasPosted, setHasposted] = useState(false);
-    let addMsg = async (id: string, currentIndex: number) => {
+    let handlePostMessage = (posted: boolean) => {
+        setHasposted(posted);
+        setnumOfArticle(numOfArticle + 1);
+    }
+    let addMsgToDisplay = async (id: string, currentIndex: number) => {
         await axios.get(`/api/comments/${id}/${currentIndex}/3`)
             .then((res) => {
                 setCurrentIndex(currentIndex + 3);
@@ -52,22 +56,28 @@ function MessageInterface(props: { id: string }) {
         <div className="message-interface">
             <h3>הוסף תגובה</h3>
             {hasPosted ? <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly", fontSize: "1.2rem", padding: "20px" }}><span>התגובה נשלחה בהצלחה! </span><SendPost /></div> :
-                <MessageForm postState={setHasposted} id={props.id} action="/api/comments/" />}
+                <MessageForm postState={handlePostMessage} id={props.id} action="/api/comments/" />}
             <FineSep dashed />
             <h3>תגובות ({numOfArticle})  </h3>
 
             { !comments ? <div style={{ display: "flex", justifyContent: "center", padding: "20px 0" }}><CircularProgress /></div>
                 :
                 comments.map((comment, index) => {
-                    return <Comments comments={comment} key={index} />
-
+                    switch (index) {
+                        case 0:
+                            return (<React.Fragment key={index}><Comments comments={comment} /><FineSep /></React.Fragment>)
+                        case (comments.length - 1):
+                            return (<React.Fragment key={index}><Comments comments={comment} /></React.Fragment>)
+                        default:
+                            return <React.Fragment key={index}><Comments comments={comment} /><FineSep /></React.Fragment>
+                    }
                 })}
             <div style={{
                 display: 'flex', justifyContent: 'center'
             }}>
                 {numOfArticle > comments.length &&
                     <ExtendedBtn
-                        onClick={() => addMsg(props.id, currentIndex)}
+                        onClick={() => addMsgToDisplay(props.id, currentIndex)}
                         customStyle={{ backgroundColor: '#03a9f4', color: '#fff', margin: "20px 0" }}
                     >
                         <span>הצג עוד</span>

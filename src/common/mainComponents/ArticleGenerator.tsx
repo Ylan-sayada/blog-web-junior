@@ -7,6 +7,7 @@ let article = {
     img: "https://picsum.photos/200/300",
     title: "פוסט נחמד",
     desc: "היי מחמכחמכ מכלכמכלמ כממ כמככמלג מכמכמ כמכחכ כממכחר קקקצ גצגצגצ גמגמ",
+    content: "hello",
     publishDate: new Date(),
     commentsNum: 4,
     viewNum: 50,

@@ -17,6 +17,12 @@ html {
     font-weight: bold;
 }
 
+
+
+header+* {
+    min-height: 100vh;
+}
+
 .italic {
     font-style: italic;
 }
