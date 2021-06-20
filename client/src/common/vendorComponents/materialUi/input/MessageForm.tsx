@@ -3,6 +3,7 @@ import { Button, TextField } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios';
 import isEmail from '../../../../utils/isEmail';
+import checkObjectBoolValue from '../../../../utils/checkObjectBoolValue';
 export default function MessageForm(props: { id: string, action: string, postState: any }) {
     let errStateObject = {
         errOnMail: false,
@@ -22,13 +23,15 @@ export default function MessageForm(props: { id: string, action: string, postSta
             text: text.current.value,
             articleID: props.id
         }
-        let err = Object.assign({}, errStateObject);
-        err.errOnMail = isEmail(data.mail) ? false : true;
-        err.errOnName = data.name.length > 10 || data.name.length === 0 ? true : false;
-        err.errOnTxt = data.text.length === 0 ? true : false;
-        let res = Object.values(err);
+        errStateObject = {
+            errOnMail: isEmail(data.mail),
+            errOnName: data.name.length > 10 || data.name.length === 0,
+            errOnTxt: data.text.length === 0,
+        }
 
-        if (!res.includes(true)) {
+        checkObjectBoolValue(errStateObject, true) ?
+            setError(errStateObject)
+            :
             axios.post(`${props.action}`, data)
                 .then((res) => {
                     if (res.data)
@@ -37,11 +40,6 @@ export default function MessageForm(props: { id: string, action: string, postSta
                 .catch(function (error) {
                     console.log(error);
                 })
-        }
-        else {
-            setError(err);
-        }
-
     };
     return (
         <React.Fragment>
@@ -81,3 +79,5 @@ export default function MessageForm(props: { id: string, action: string, postSta
         </React.Fragment>
     )
 }
+
+

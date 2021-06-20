@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -6,19 +6,26 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import CommentIcon from '@material-ui/icons/Comment';
-export default function SocialPanel(props: { viewNum: number, commentsNum: number, likeNum: number }) {
-    let [liked, setliked] = useState(false);
-    let likeRef = useRef(document.createElement("span"));
+export default function SocialPanel(props: { viewNum: number, commentsNum: number, likeNum: number, serverReq?: Function }) {
+    let [likeState, setlikeState] = useState({ liked: false, likeSum: props.likeNum });
+    //let likeRef = useRef(document.createElement("span"));
+    let usePrevious = (value: any) => {
+        let ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+    let previousLike = usePrevious(props.likeNum);
+    useEffect(() => {
+        if (previousLike !== props.likeNum) {
+            setlikeState({ ...likeState, likeSum: props.likeNum })
+        }
+    }, [props.likeNum, likeState, previousLike])
     let handleLike = () => {
-        if (!liked) {
-            setliked(true);
-            likeRef.current.innerHTML = (props.likeNum + 1).toString();
-        } else {
-            setliked(false);
-            likeRef.current.innerHTML = (props.likeNum + 1 - 1).toString();
+        if (likeState.liked) {
         }
     }
-
     return (
         <div className="social-info">
             <div className="view-and-comment">
@@ -31,7 +38,7 @@ export default function SocialPanel(props: { viewNum: number, commentsNum: numbe
                 <TwitterIcon className="twitter" />
             </span>
             <div className="likes" onClick={handleLike}>
-                {liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}<span ref={likeRef}>{props.likeNum}</span>
+                {likeState.liked ? <FavoriteIcon /> : <FavoriteBorderIcon />}<span>{likeState.likeSum}</span>
             </div>
         </div>
     )

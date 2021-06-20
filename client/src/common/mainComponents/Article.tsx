@@ -22,22 +22,22 @@ interface propsArticle {
     column?: boolean
 }
 let articleByDefault = {
-    _id: 1,
+    _id: 0,
     author: "",
     img: "https://picsum.photos/200/300",
     title: "",
     desc: "",
     content: "",
     publishDate: new Date(),
-    commentsNum: 4,
-    viewNum: 50,
-    likeNum: 24,
+    commentsNum: 0,
+    viewNum: 0,
+    likeNum: 50,
 }
 export default function Article(props: { article?: propsArticle }) {
     const [article, setArticleWithID] = useState(props.article || articleByDefault);
     let { id } = useParams<{ id: string }>();
     useEffect(() => {
-        axios.get(`/api/article/${id}`)
+        axios.get(`http://localhost:3000/api/article/${id}`)
             .then((res: any) => {
 
                 setArticleWithID(res.data);
@@ -52,7 +52,9 @@ export default function Article(props: { article?: propsArticle }) {
             document.body.style.backgroundColor = "initial";
         }
     }, [id])
+    let updateLikeToServ = () => {
 
+    }
     return (
         <div className="article" dir="rtl">
             <div className="head-article" style={{ backgroundImage: `url(${article.img})` }}>
@@ -72,7 +74,7 @@ export default function Article(props: { article?: propsArticle }) {
                 <h3>{article.desc}</h3>
                 <div dangerouslySetInnerHTML={{ __html: article.content }} />
                 <FineSep />
-                <SocialPanel viewNum={Number(article.viewNum)} commentsNum={Number(article.commentsNum)} likeNum={Number(article.likeNum)} />
+                <SocialPanel serverReq={updateLikeToServ} viewNum={Number(article.viewNum)} commentsNum={Number(article.commentsNum)} likeNum={Number(article.likeNum)} />
                 <FineSep />
                 <MessageInterface id={`${article._id}`} />
             </div>
