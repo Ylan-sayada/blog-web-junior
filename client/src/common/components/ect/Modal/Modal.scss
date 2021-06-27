@@ -1,0 +1,17 @@
+@use '../../../../ressources/scss/helpers/animations.scss'as animations;
+
+.modal {
+
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 8000;
+    background-color: rgba(17, 17, 17, 0.295);
+    overflow: scroll;
+
+}

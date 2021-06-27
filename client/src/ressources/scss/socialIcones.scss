@@ -1,0 +1,13 @@
+@import'./helpers/flexPlacement.scss';
+
+.social-icones {
+    @extend .inlineFlex;
+    @extend .equalSpace;
+    width: 100%;
+
+    & svg {
+        width: 30px;
+        height: 30px;
+
+    }
+}

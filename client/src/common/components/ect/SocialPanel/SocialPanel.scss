@@ -1,0 +1,57 @@
+@use '../../../../ressources/scss/helpers/variable.scss'as variable;
+
+.social-info {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    color: variable.$text-dark-secondary-color;
+    display: flex;
+    font-size: variable.$small;
+    align-items: center;
+
+    .social-network {
+        display: flex;
+
+        .linkedin,
+        .facebook,
+        .twitter {
+            margin: 0px 5px;
+            transition: 0.5s color ease;
+            cursor: pointer;
+        }
+
+        .linkedin:hover {
+            color: variable.$linkedin;
+        }
+
+        .facebook:hover {
+            color: variable.$facebook;
+        }
+
+        .twitter:hover {
+            color: variable.$twitter;
+        }
+    }
+
+
+    .view-and-comment,
+    .likes {
+        display: flex;
+
+        span {
+            margin: 0 5px;
+            display: flex;
+            align-items: center;
+        }
+
+    }
+
+    .likes {
+        margin: 0 5px;
+        cursor: pointer;
+
+        svg {
+            color: pink;
+        }
+    }
+
+}

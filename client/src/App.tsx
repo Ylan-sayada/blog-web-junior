@@ -1,18 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import Main from './common/mainComponents/Main';
-import Nav from './common/mainComponents/Nav';
-import CounterDay from './common/components/ect/CounterDay'
-import Footer from './common/mainComponents/Footer';
-import LangContext, { langData } from './utils/LangContext';
-import './ressources/scss/index.scss';
+import Main from './common/pages/Main';
+import Nav from './common/components/ect/Nav';
+import CounterDay from './common/components/ect/CounterDay';
+import Footer from './common/components/ect/Footer';
+import UtilsContext from './common/context/UtilsContext';
+import * as utils from '../src/common/utils';
+import './ressources/scss/global.scss';
 import ScrollTop from './common/components/ect/ScrollTop';
 function App() {
   let startTime = new Date(2021, 3, 25);
   return (
     <div className="App">
       <header className="App-header">
-        <LangContext.Provider value={langData}>
+        <UtilsContext.Provider value={utils}>
           <Router>
             <ScrollTop />
             <CounterDay
@@ -23,7 +24,7 @@ function App() {
             <Main />
             <Footer />
           </Router>
-        </LangContext.Provider>
+        </UtilsContext.Provider>
       </header>
     </div>
   );

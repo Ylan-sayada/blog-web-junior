@@ -1,0 +1,21 @@
+@use '../../../../ressources/scss/base/resetInput.scss'as reset;
+
+.newsletter-input {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+
+  >* {
+    margin: 10px 0 !important;
+  }
+
+  label {
+    right: 0;
+    left: auto;
+  }
+
+  input {
+    @include reset.resetInput;
+  }
+
+}

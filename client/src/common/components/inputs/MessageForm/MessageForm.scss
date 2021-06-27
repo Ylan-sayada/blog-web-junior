@@ -1,0 +1,17 @@
+.add-message-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    >* {
+        width: 90%;
+        margin: 20px 0;
+    }
+
+    label {
+        right: 0;
+        left: auto;
+    }
+
+
+}
