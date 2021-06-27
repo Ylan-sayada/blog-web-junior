@@ -40,17 +40,7 @@
         margin: 5px 0;
     }
 
-    .button-color {
-        background-color: variable.$base-color;
-        color: #fff;
-        font-weight: bold;
-        transition: 1s all ease;
 
-        &:hover {
-            background-color: variable.$secondary-color;
-            transition: 1s all ease;
-        }
-    }
 
 
     .final-buttons {

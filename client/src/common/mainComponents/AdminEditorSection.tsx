@@ -49,9 +49,9 @@ export default function AdminEditorSection() {
                 desc: descInput.current.value,
                 content: draftToHtml(convertToRaw(editorState.getCurrentContent())),
                 publishDate: new Date(),
-                commentsNum: "0",
-                viewNum: "0",
-                likeNum: "0"
+                commentsNum: 0,
+                viewNum: 0,
+                listOfLike: []
             });
     }
     let sendArticle = (article: any) => {
@@ -76,11 +76,11 @@ export default function AdminEditorSection() {
             img: isUndefined(headerImg) ? notFound : headerImg.url,
             title: titleInput.current.value,
             desc: descInput.current.value,
-            content: <div dangerouslySetInnerHTML={{ __html: content }} />,
+            content: content,
             publishDate: new Date(),
             commentsNum: 0,
             viewNum: 0,
-            likeNum: 0,
+            likeSum: 0,
         })
         setOpen(true);
     };

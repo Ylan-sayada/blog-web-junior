@@ -1,10 +1,12 @@
+let utils = require('./src/utils');
 const express = require('express');
 const app = express();
 const path = require('path');
 const fs = require('fs');
 const env = require('./src/modules/EnvConfig.js');
 const dbCon = require('./src/modules/db_con');
-const multer  = require('multer')
+const multer  = require('multer');
+const requestIp = require('request-ip');
 
 env.start();
 
@@ -26,31 +28,48 @@ let upload = multer({
 
 //middlewares
 app.use('/public',express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
+app.use(requestIp.mw())
 
+
+
+
+
+//POST requests
 app.post("/api/comments",(req,res)=>{
   let db = new dbCon(env.getDb(),"comments");
-  let isSuccesfullyAdded = db.addComments(req.body);
-  if(isSuccesfullyAdded)
+   db.addContent(req.body);
+   db.incComments(req.body.articleID);
   res.send(true);
+  
 });
 
 app.post("/api/article",upload.single('image'),(req,res)=>{
   let db = new dbCon(env.getDb(),"articles");
-  let isSuccesfullyAdded = db.addComments(JSON.parse(req.body.document));
-  isSuccesfullyAdded&&res.send(true)
-
+  let data = JSON.parse(req.body.document);
+  db.addContent(data);
+  res.send(true);
 });
 
-//get all comments
+//PUT requests 
+app.put("/api/socialInteraction/:id/:userId",async(req,res)=>{
+   let {userId} = req.params;
+   let db = new dbCon(env.getDb(),"articles");
+ })
+
+
+
+//GET requests 
+
 app.get("/api/comments/:id", async (req, res) => {
-  let {collection,id} = req.params;
-  let db = new dbCon(env.getDb(),collection);
+  let {id} = req.params;
+  let db = new dbCon(env.getDb(),"comments");
   let commentsList =  await db.getComments(id);
   res.send(commentsList);
   });
 
-//get only part of comments
+
   app.get("/api/comments/:id/:start/:amountComments", async (req, res) => {
     let {id,start,amountComments} = req.params;
     let db = new dbCon(env.getDb(),"comments");
@@ -63,12 +82,20 @@ app.get("/api/comments/:id", async (req, res) => {
     });
 
     app.get("/api/article/:id", async (req, res) => {
+      let response = false;
       let {id} = req.params;
-      console.log(req.ip)
       let db = new dbCon(env.getDb(),"articles");
-      let result =  await db.getArticle(id);
- 
-      res.send({...result[0],img:`http://localhost:3001/public/uploads/${result[0].img}`})
+      try{
+        let result =  await db.getArticle(id);
+        if(result.length > 0){
+      result[0].likeSum = result[0].listOfLike.length;
+      delete result[0].listOfLike;
+      response = {...result[0],img:`http://localhost:3001/public/uploads/${result[0].img}`};
+        }
+      }catch(err){
+        console.log(err)
+      }
+      res.send(response);
     }
       );
 
@@ -77,7 +104,7 @@ app.get("/api/comments/:id", async (req, res) => {
       let db = new dbCon(env.getDb(),"articles");
       new Promise((resolve,reject)=>{
           if(start === "0"){
-            Promise.all([db.getSumOfArticles(),db.getArticlesWithLimit(orderBy,parseInt(start),parseInt(amountArticles))])
+            Promise.all([db.getSumOfArticles(),db.getArticlesPreviewWithLimit(orderBy,parseInt(start),parseInt(amountArticles))])
             .then(values => {
               resolve(values)
             })
@@ -85,7 +112,7 @@ app.get("/api/comments/:id", async (req, res) => {
           }
           else{
             try{
-              resolve(db.getArticlesWithLimit(orderBy,parseInt(start),parseInt(amountArticles)));
+              resolve(db.getArticlesPreviewWithLimit(orderBy,parseInt(start),parseInt(amountArticles)));
             }
             catch(err){
               reject(err)
@@ -94,10 +121,13 @@ app.get("/api/comments/:id", async (req, res) => {
         }).then(response => {
           let arrToModified = start === "0" ? response[response.length - 1] : response;
           let modifiedData = arrToModified.map(data =>{
-            return {
+            let res = {
               ...data,
+              likeSum:data.listOfLike.length,
               img:`http://localhost:3001/public/uploads/${data.img}`
             }
+            delete res.listOfLike;
+            return res
           })
           res.send(start === "0" ? [response[0],modifiedData] : modifiedData)
         })
@@ -105,5 +135,12 @@ app.get("/api/comments/:id", async (req, res) => {
           console.log(err);
         })
       });
+
+
+
+
+      // app.get('/*', (req, res) => {
+      //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+      // });
 
 app.listen(env.getPort());

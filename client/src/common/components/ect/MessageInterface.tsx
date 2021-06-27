@@ -62,16 +62,7 @@ function MessageInterface(props: { id: string }) {
 
             {!comments ? <div style={{ display: "flex", justifyContent: "center", padding: "20px 0" }}><CircularProgress /></div>
                 :
-                comments.map((comment, index) => {
-                    switch (index) {
-                        case 0:
-                            return (<React.Fragment key={index}><Comments comments={comment} /></React.Fragment>)
-                        case (comments.length - 1):
-                            return (<React.Fragment key={index}><FineSep /><Comments comments={comment} /></React.Fragment>)
-                        default:
-                            return <React.Fragment key={index}><Comments comments={comment} /><FineSep /></React.Fragment>
-                    }
-                })}
+                comments.map((comment, index) => <Comments key={index} comments={comment} />)}
             <div style={{
                 display: 'flex', justifyContent: 'center'
             }}>

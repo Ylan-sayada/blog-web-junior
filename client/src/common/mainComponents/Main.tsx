@@ -4,7 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import Blog from './Blog';
 import About from './About';
 import Article from './Article';
+import AuthPanel from './AuthPanel';
 import AdminEditorSection from './AdminEditorSection';
+import NotFound from './NotFound';
 export default function Main(): JSX.Element {
 
     return (
@@ -17,7 +19,9 @@ export default function Main(): JSX.Element {
                 <Route path="/about">
                     <About />
                 </Route>
-
+                <Route path="/member">
+                    <AuthPanel />
+                </Route>
                 <Route path="/blog">
                     <Blog />
                 </Route>
@@ -27,6 +31,7 @@ export default function Main(): JSX.Element {
                 <Route path="/admin" >
                     <AdminEditorSection />
                 </Route>
+                <Route component={NotFound} />
             </Switch>
         </React.Fragment>
     )

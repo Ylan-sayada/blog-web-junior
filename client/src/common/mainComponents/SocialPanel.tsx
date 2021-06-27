@@ -6,8 +6,8 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import CommentIcon from '@material-ui/icons/Comment';
-export default function SocialPanel(props: { viewNum: number, commentsNum: number, likeNum: number, serverReq?: Function }) {
-    let [likeState, setlikeState] = useState({ liked: false, likeSum: props.likeNum });
+export default function SocialPanel(props: { viewNum: number, commentsNum: number, likeSum: number, serverReq?: Function }) {
+    let [likeState, setlikeState] = useState({ liked: false, likeSum: props.likeSum });
     //let likeRef = useRef(document.createElement("span"));
     let usePrevious = (value: any) => {
         let ref = useRef();
@@ -16,12 +16,12 @@ export default function SocialPanel(props: { viewNum: number, commentsNum: numbe
         });
         return ref.current;
     }
-    let previousLike = usePrevious(props.likeNum);
+    let previousLike = usePrevious(props.likeSum);
     useEffect(() => {
-        if (previousLike !== props.likeNum) {
-            setlikeState({ ...likeState, likeSum: props.likeNum })
+        if (previousLike !== props.likeSum) {
+            setlikeState({ ...likeState, likeSum: props.likeSum })
         }
-    }, [props.likeNum, likeState, previousLike])
+    }, [props.likeSum, likeState, previousLike])
     let handleLike = () => {
         if (likeState.liked) {
         }
