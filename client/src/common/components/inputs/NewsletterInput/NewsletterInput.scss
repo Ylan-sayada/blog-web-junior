@@ -1,5 +1,3 @@
-@use '../../../../ressources/scss/base/resetInput.scss'as reset;
-
 .newsletter-input {
   display: flex;
   justify-content: space-evenly;
@@ -13,9 +11,4 @@
     right: 0;
     left: auto;
   }
-
-  input {
-    @include reset.resetInput;
-  }
-
 }

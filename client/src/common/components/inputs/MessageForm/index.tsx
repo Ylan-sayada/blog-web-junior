@@ -3,8 +3,11 @@ import "./MessageForm.scss";
 import { Button, TextField } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios';
+import { buttonStyle, inputStyle } from '../../../../ressources/Mui-styles/InteractionStyle';
 import { isEmail, checkObjectBoolValue } from '../../../utils';
 export default function MessageForm(props: { id: string, action: string, postState: any }) {
+    let classesBtn = buttonStyle();
+    let classesInput = inputStyle();
     let errStateObject = {
         errOnMail: false,
         errOnName: false,
@@ -52,17 +55,20 @@ export default function MessageForm(props: { id: string, action: string, postSta
                     error={error.errOnName}
                     helperText={error.errOnName ? "ארוך מדיי(מעל 10 תווים)/ריק" : ""}
                     inputRef={name}
+                    className={classesInput.root}
                     label="שם מלא" />
                 <TextField
                     error={error.errOnMail}
                     label="הכנס דואל כאן"
                     helperText={error.errOnMail ? "מייל לא תקין" : ""}
+                    className={classesInput.root}
                     inputRef={mail}
                 />
                 <TextField
                     error={error.errOnTxt}
                     helperText={error.errOnTxt ? "השדה ריק" : ""}
                     inputRef={text}
+                    className={classesInput.root}
                     id="standard-textarea"
                     label="תגובה"
                     rows="4"
@@ -72,6 +78,8 @@ export default function MessageForm(props: { id: string, action: string, postSta
                     dir="ltr"
                     type="submit"
                     endIcon={<SendIcon />}
+                    className={classesBtn.root}
+
                 >
                     שלח
                 </Button>
