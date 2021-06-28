@@ -1,0 +1,24 @@
+@use '../../../../ressources/scss/helpers/variable.scss'as variable;
+
+.counter-day {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+
+    font-size: variable.$small;
+
+    >div {
+        align-self: center;
+        text-align: center;
+    }
+
+    &.green {
+        background-color: green;
+        color: variable.$text-light-color;
+    }
+
+    &.yellow {
+        background-color: yellow;
+        color: variable.$text-dark-color;
+    }
+}

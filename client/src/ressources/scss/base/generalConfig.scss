@@ -1,3 +1,4 @@
+@use '../helpers/variable.scss'as variable;
 @import './typography.scss';
 
 body {
@@ -23,12 +24,29 @@ header+* {
     min-height: 100vh;
 }
 
+body .button-color {
+    background-color: variable.$base-color;
+    color: #fff;
+    font-weight: bold;
+    transition: 1s all ease;
+
+    &:hover {
+        background-color: variable.$secondary-color;
+        transition: 1s all ease;
+    }
+}
+
 .italic {
     font-style: italic;
 }
 
 .only-desktop {
     display: none !important;
+}
+
+.sub-desc {
+    font-size: 0.8rem;
+    color: inherit;
 }
 
 h1,

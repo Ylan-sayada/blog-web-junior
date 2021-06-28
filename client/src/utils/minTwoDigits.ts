@@ -1,4 +1,0 @@
-let minTwoDigits = (num: number) => {
-    return (num < 10 ? '0' : '') + num;
-}
-export default minTwoDigits;

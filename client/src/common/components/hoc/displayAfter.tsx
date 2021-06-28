@@ -22,7 +22,6 @@ function DisplayAfter(props: { second: number, children: any }) {
 
 let hoc = (second: number, WrappedComponent: any) => {
     const displayAfter = ({ ...props }) => (<DisplayAfter second={second}><WrappedComponent {...props} /></DisplayAfter>);
-
     return displayAfter;
 }
 export default hoc;

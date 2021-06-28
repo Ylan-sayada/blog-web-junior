@@ -1,0 +1,12 @@
+@use '../../../../ressources/scss/helpers/variable.scss'as variable;
+
+.navBar {
+    background-color: variable.$base-color;
+    color: variable.$text-light-color;
+    justify-content: space-between;
+
+    .right-side {
+        display: flex;
+        align-items: center;
+    }
+}
